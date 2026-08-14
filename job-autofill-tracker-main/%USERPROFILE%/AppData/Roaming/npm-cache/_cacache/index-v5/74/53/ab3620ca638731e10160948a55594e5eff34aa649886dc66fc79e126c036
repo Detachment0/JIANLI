@@ -1,0 +1,2 @@
+
+522bbc1ca9fd9156865c86b04e9080d1f363e9f7	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/is-port-reachable","integrity":null,"time":1786238744002,"size":"262","metadata":{"time":1786238744002,"url":"http://registry.npm.taobao.org/is-port-reachable","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/is-port-reachable"},"options":{"compress":true},"status":301}}

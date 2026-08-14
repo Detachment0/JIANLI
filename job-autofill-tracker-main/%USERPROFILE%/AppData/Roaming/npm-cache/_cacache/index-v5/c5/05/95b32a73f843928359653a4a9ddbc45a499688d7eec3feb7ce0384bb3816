@@ -1,0 +1,2 @@
+
+8975f8b7bf8818f95119ca0e82a6a6a9b23cec56	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/string-width","integrity":null,"time":1786238744497,"size":"262","metadata":{"time":1786238744497,"url":"http://registry.npm.taobao.org/string-width","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/string-width"},"options":{"compress":true},"status":301}}

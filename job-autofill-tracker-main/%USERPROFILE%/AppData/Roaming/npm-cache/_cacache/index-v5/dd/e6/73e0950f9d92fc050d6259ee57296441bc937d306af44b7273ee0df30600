@@ -1,0 +1,2 @@
+
+f9a29d5b63b660be5f4fe738f37fabcb49581a10	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/negotiator","integrity":null,"time":1786238744507,"size":"262","metadata":{"time":1786238744507,"url":"http://registry.npm.taobao.org/negotiator","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/negotiator"},"options":{"compress":true},"status":301}}

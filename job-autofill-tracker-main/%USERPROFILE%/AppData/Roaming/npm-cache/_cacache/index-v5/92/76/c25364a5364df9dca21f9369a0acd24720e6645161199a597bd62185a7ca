@@ -1,0 +1,2 @@
+
+df857bbade648f643d2c22be1686fbf1a92bb8e1	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/json-schema-traverse","integrity":null,"time":1786238744497,"size":"262","metadata":{"time":1786238744497,"url":"http://registry.npm.taobao.org/json-schema-traverse","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/json-schema-traverse"},"options":{"compress":true},"status":301}}

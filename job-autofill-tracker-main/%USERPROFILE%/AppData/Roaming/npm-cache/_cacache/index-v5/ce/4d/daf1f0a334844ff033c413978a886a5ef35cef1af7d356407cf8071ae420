@@ -1,0 +1,2 @@
+
+6b2c3f4424b7395f76b2fb3bd726a16647e19149	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/htmlparser2/-/htmlparser2-10.1.0.tgz","integrity":null,"time":1785939379566,"size":"262","metadata":{"time":1785939379565,"url":"http://registry.npm.taobao.org/htmlparser2/-/htmlparser2-10.1.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/htmlparser2/-/htmlparser2-10.1.0.tgz"},"options":{"compress":true},"status":301}}

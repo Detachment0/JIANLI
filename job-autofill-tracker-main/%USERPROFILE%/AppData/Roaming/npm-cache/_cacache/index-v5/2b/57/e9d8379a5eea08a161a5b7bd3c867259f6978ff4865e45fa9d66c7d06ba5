@@ -1,0 +1,2 @@
+
+0e85b52e2cfa267c0a8798fbe055f7c7188d56e3	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/jszip/-/jszip-3.10.1.tgz","integrity":null,"time":1785939379411,"size":"262","metadata":{"time":1785939379411,"url":"http://registry.npm.taobao.org/jszip/-/jszip-3.10.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/jszip/-/jszip-3.10.1.tgz"},"options":{"compress":true},"status":301}}

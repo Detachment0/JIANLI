@@ -1,0 +1,2 @@
+
+f71eda46b661c283aed71e320874576bfe0a8052	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/is-docker/-/is-docker-3.0.0.tgz","integrity":null,"time":1785939379506,"size":"262","metadata":{"time":1785939379506,"url":"http://registry.npm.taobao.org/is-docker/-/is-docker-3.0.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/is-docker/-/is-docker-3.0.0.tgz"},"options":{"compress":true},"status":301}}

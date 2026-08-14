@@ -1,0 +1,2 @@
+
+3f6845eb338fa043817dc68ca49aff075aa47e7b	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/balanced-match","integrity":null,"time":1786238745737,"size":"262","metadata":{"time":1786238745737,"url":"http://registry.npm.taobao.org/balanced-match","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:46 GMT","location":"https://registry.npmmirror.com/balanced-match"},"options":{"compress":true},"status":301}}

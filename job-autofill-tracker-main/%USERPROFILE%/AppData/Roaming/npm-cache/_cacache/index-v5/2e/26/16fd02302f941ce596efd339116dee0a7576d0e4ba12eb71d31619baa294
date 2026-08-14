@@ -1,0 +1,2 @@
+
+7e1bd59923b0f2d924c2bf563417fa1f3e832003	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/chalk-template","integrity":null,"time":1786238744001,"size":"262","metadata":{"time":1786238744001,"url":"http://registry.npm.taobao.org/chalk-template","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/chalk-template"},"options":{"compress":true},"status":301}}

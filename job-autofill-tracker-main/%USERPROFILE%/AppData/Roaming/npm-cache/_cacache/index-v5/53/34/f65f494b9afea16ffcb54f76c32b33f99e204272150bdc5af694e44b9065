@@ -1,0 +1,2 @@
+
+5688baa17ff0d1270cb2c40b58fd5d463d91817c	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/atomically/-/atomically-2.1.1.tgz","integrity":null,"time":1785939379897,"size":"262","metadata":{"time":1785939379896,"url":"http://registry.npm.taobao.org/atomically/-/atomically-2.1.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/atomically/-/atomically-2.1.1.tgz"},"options":{"compress":true},"status":301}}

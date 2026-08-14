@@ -1,0 +1,2 @@
+
+626095a02cb4d5a0a4259c295d717dc873b93f09	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/scheduler/-/scheduler-0.27.0.tgz","integrity":null,"time":1785939378949,"size":"262","metadata":{"time":1785939378949,"url":"http://registry.npm.taobao.org/scheduler/-/scheduler-0.27.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/scheduler/-/scheduler-0.27.0.tgz"},"options":{"compress":true},"status":301}}

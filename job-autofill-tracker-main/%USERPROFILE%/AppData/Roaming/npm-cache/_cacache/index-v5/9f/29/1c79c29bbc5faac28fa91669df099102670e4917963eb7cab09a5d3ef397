@@ -1,0 +1,2 @@
+
+7d3d762d0c2e9f7e49205c0e30770280ec3f1639	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/fdir/-/fdir-6.5.0.tgz","integrity":null,"time":1785939379605,"size":"262","metadata":{"time":1785939379605,"url":"http://registry.npm.taobao.org/fdir/-/fdir-6.5.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/fdir/-/fdir-6.5.0.tgz"},"options":{"compress":true},"status":301}}

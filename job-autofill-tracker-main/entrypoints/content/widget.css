@@ -1,0 +1,506 @@
+/* =========================================================
+   Widget CSS — Job Autofill Tracker
+   Scoped under .jat (from design-tokens.css) + .jtRoot
+   ========================================================= */
+
+/* ----- Root (positioning) ----- */
+.jtRoot.jat {
+  all: initial;
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483646;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  color: var(--color-text);
+  line-height: var(--line-normal);
+  -webkit-font-smoothing: antialiased;
+}
+.jtRoot.jat *, .jtRoot.jat *::before, .jtRoot.jat *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----- FAB ----- */
+.jtFab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  font-size: 14px;
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--motion-short) var(--motion-ease);
+  user-select: none;
+  font-family: inherit;
+}
+.jtFab:hover { transform: scale(1.08); }
+.jtFab:active { transform: scale(0.96); }
+.jtFab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.jtFabHigh { background: var(--color-success); }
+.jtFabMid { background: var(--color-warning); }
+.jtFabLow { background: var(--color-text-tertiary); }
+
+.jtFabDot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-bg);
+  border-radius: 50%;
+  background: var(--color-danger);
+}
+
+/* ----- Drawer (slide from right) ----- */
+.jtDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 100vw);
+  height: 100vh;
+  border-left: var(--border-width) solid var(--color-border);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-xl);
+  animation: jtDrawerIn var(--motion-medium) var(--motion-ease-out);
+  overflow: hidden;
+}
+@keyframes jtDrawerIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* ----- Drawer Header ----- */
+.jtHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) 0;
+  flex-shrink: 0;
+}
+.jtKicker {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.jtTitle {
+  font-size: var(--text-title);
+  font-weight: var(--weight-semibold);
+  line-height: var(--line-tight);
+  margin: var(--space-1) 0 0;
+}
+.jtCompany {
+  color: var(--color-text-secondary);
+  font-size: var(--text-body);
+  margin: var(--space-1) 0 0;
+}
+
+.jtIconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: inherit;
+  transition: background var(--motion-micro) var(--motion-ease);
+}
+.jtIconButton:hover { background: var(--color-surface-hover); }
+
+.jtDemoBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  margin: 0 var(--space-5);
+  border-radius: var(--radius-full);
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  padding: 2px 8px;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+}
+
+/* ----- Drawer Primary Actions (3-button entry row) ----- */
+.jtPrimaryActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5) var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-border);
+  flex-shrink: 0;
+}
+.jtPrimaryActions .jtButton {
+  width: 100%;
+  padding: 10px 8px;
+  justify-content: center;
+}
+
+/* ----- Drawer State (primary content area) ----- */
+.drawer-state {
+  padding: var(--space-3) var(--space-5);
+  flex-shrink: 0;
+}
+.state-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+.state-score {
+  font-size: var(--text-heading);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  color: var(--color-accent);
+}
+.state-tracked {
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  color: var(--color-success);
+}
+.state-action-status {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-caption);
+  color: var(--color-text-secondary);
+}
+
+/* ----- Drawer Nav (compact tabs) ----- */
+.drawer-nav {
+  display: flex;
+  gap: var(--space-1);
+  padding: 0 var(--space-5);
+  border-bottom: var(--border-width) solid var(--color-border);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.drawer-nav .btn {
+  padding: 6px 10px;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--color-text-secondary);
+}
+.drawer-nav .btn:hover {
+  color: var(--color-text);
+  background: none;
+}
+.drawer-nav .btn-tab-active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ----- Drawer Body (tab content) ----- */
+.jtDrawerBody {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  padding: var(--space-4) var(--space-5);
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+}
+.jtDrawerBody * { min-width: 0; }
+
+/* ----- Drawer Footer ----- */
+.jtDrawerFooter {
+  flex-shrink: 0;
+  border-top: var(--border-width) solid var(--color-border);
+  padding: var(--space-3) var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+}
+.jtTrackForm {
+  display: grid;
+  gap: var(--space-2);
+  max-height: 45vh;
+  overflow-y: auto;
+}
+.jtTrackForm label { font-size: var(--text-caption); font-weight: var(--weight-medium); color: var(--color-text-secondary); }
+.jtTrackForm textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 60px;
+}
+.jtTrackForm p { color: var(--color-text-tertiary); font-size: var(--text-caption); line-height: var(--line-tight); }
+.jtTrackReview {
+  display: grid;
+  gap: var(--space-3);
+}
+.jtTrackReview > div:first-child {
+  display: grid;
+  gap: var(--space-1);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--border-width) solid var(--color-border);
+  font-size: var(--text-body);
+}
+.jtTracked { color: var(--color-success); font-size: var(--text-body); font-weight: var(--weight-medium); }
+.jtNotice { color: var(--color-text-secondary); font-size: var(--text-caption); }
+.jtFooter { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+
+/* ----- Mode Switch ----- */
+.jtModeSwitch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-1);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  padding: var(--space-1);
+}
+.jtModeSwitch button {
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-tertiary);
+  padding: 5px 8px;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  font-family: inherit;
+}
+.jtModeSwitch button.jtModeActive {
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+/* ----- Shared Components (used by sub-tabs) ----- */
+.jtButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  padding: 8px 14px;
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  transition: background var(--motion-micro) var(--motion-ease);
+}
+.jtButton:hover { background: var(--color-accent-hover); }
+.jtButton:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+.jtButtonGhost {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.jtButtonGhost:hover { background: var(--color-surface-hover); }
+
+.jtMuted { color: var(--color-text-secondary); font-size: var(--text-body); }
+.jtError { color: var(--color-danger); font-size: var(--text-body); font-weight: var(--weight-medium); }
+.jtTextarea {
+  width: 100%;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 8px 12px;
+  font-size: var(--text-body);
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--motion-micro) var(--motion-ease);
+}
+.jtTextarea:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
+.jtTextarea::placeholder { color: var(--color-text-tertiary); }
+
+.jtField {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+}
+.jtField input, .jtField select {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 6px 10px;
+  font-size: var(--text-body);
+  font-family: inherit;
+  outline: none;
+}
+.jtField input:focus, .jtField select:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-subtle); }
+.jtField select { appearance: none; cursor: pointer; }
+.jtFieldWide { grid-column: 1 / -1; }
+
+.jtGrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+.jtGrid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+.jtRow { display: flex; gap: var(--space-2); }
+.jtRow > * { flex: 1; }
+
+/* ----- Match / Analysis ----- */
+.jtMatch { display: grid; gap: var(--space-3); }
+.jtScoreRow { display: flex; align-items: baseline; gap: var(--space-3); }
+.jtScore { font-size: var(--text-display); font-weight: var(--weight-bold); line-height: 1; }
+.jtScoreLabel { color: var(--color-text-secondary); font-size: var(--text-body); font-weight: var(--weight-medium); }
+.jtChipGroup { display: grid; gap: var(--space-2); }
+.jtChipHeading { color: var(--color-text-tertiary); font-size: var(--text-caption); font-weight: var(--weight-medium); text-transform: uppercase; }
+.jtChips { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.jtChip {
+  display: inline-flex;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+}
+.jtChipMatched { border-color: var(--color-success); background: var(--color-success-bg); color: var(--color-success-text); }
+.jtChipMissing { border-color: var(--color-warning); background: var(--color-warning-bg); color: var(--color-warning-text); }
+.jtChipAdd { cursor: pointer; font-family: inherit; }
+.jtChipAdd:hover { border-color: var(--color-accent); }
+.jtAnalysis { display: grid; gap: var(--space-3); border-top: var(--border-width) solid var(--color-border); padding-top: var(--space-3); }
+.jtAnalysisText { font-size: var(--text-body); line-height: var(--line-relaxed); }
+.jtList { padding-left: 16px; font-size: var(--text-body); line-height: var(--line-relaxed); }
+
+/* ----- Tracker Sub-tab ----- */
+.jtStatRow { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+.jtStat {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+.jtStat span { color: var(--color-text-tertiary); font-size: var(--text-caption); font-weight: var(--weight-medium); text-transform: uppercase; }
+.jtStat strong { font-size: var(--text-heading); font-weight: var(--weight-bold); }
+.jtDueBanner {
+  border: var(--border-width) solid var(--color-warning);
+  border-radius: var(--radius-lg);
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  padding: 6px 10px;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.jtDueBannerActive { border-width: 2px; }
+
+.jtJobRow {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+.jtJobRowTop { display: flex; align-items: flex-start; gap: var(--space-2); }
+.jtJobRowMain { flex: 1; min-width: 0; display: grid; gap: var(--space-1); }
+.jtJobRowTitle { display: flex; align-items: center; gap: var(--space-2); }
+.jtJobRowTitle strong { flex: 1; min-width: 0; font-size: var(--text-body); font-weight: var(--weight-medium); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.jtJobRowTitle select { border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg); color: var(--color-text); padding: 2px 4px; font-size: 10px; font-weight: var(--weight-medium); }
+.jtJobRowCompany { color: var(--color-text-secondary); font-size: var(--text-caption); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.jtJobRowActions { display: flex; gap: var(--space-1); flex-shrink: 0; }
+.jtMiniButton {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 3px 7px;
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+}
+.jtMiniButton:disabled { opacity: 0.5; cursor: default; }
+.jtMiniDanger { color: var(--color-danger); border-color: var(--color-danger); }
+.jtUpworkBadge {
+  display: inline-flex;
+  align-self: flex-start;
+  border-radius: var(--radius-full);
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  padding: 1px 7px;
+  font-size: 9px;
+  font-weight: var(--weight-medium);
+}
+
+.jtJobRowExpanded { display: grid; gap: var(--space-2); border-top: var(--border-width) solid var(--color-border); padding-top: var(--space-2); }
+.jtJobDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+.jtJobDetails dt { color: var(--color-text-tertiary); font-size: 9px; font-weight: var(--weight-medium); text-transform: uppercase; }
+.jtJobDetails dd { margin: var(--space-1) 0 0; font-size: var(--text-caption); line-height: var(--line-tight); overflow-wrap: anywhere; }
+.jtJobDetails a { color: var(--color-accent); }
+.jtJobDetailWide { grid-column: 1 / -1; }
+.jtJobTextBlock {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.jtJobTextBlock p { font-size: var(--text-caption); line-height: var(--line-relaxed); overflow-wrap: anywhere; white-space: pre-wrap; }
+.jtJobAnswer { display: grid; gap: var(--space-1); padding-top: var(--space-2); border-top: var(--border-width) solid var(--color-border); }
+
+/* ----- Profile Sub-tab ----- */
+.jtProfileSection {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+.jtProfileSection summary {
+  cursor: pointer;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  list-style: none;
+  font-family: inherit;
+}
+.jtProfileSection summary::before { content: "+ "; color: var(--color-text-tertiary); }
+.jtProfileSection[open] summary::before { content: "- "; }
+.jtProfileSectionBody {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0 var(--space-3) var(--space-3);
+}
+.jtProfileGrid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+.jtToggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}

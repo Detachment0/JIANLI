@@ -1,0 +1,2 @@
+
+46695b7a637e26f0dafd064201698d9e5fa827bc	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/color-name/-/color-name-1.1.4.tgz","integrity":null,"time":1785939379815,"size":"262","metadata":{"time":1785939379815,"url":"http://registry.npm.taobao.org/color-name/-/color-name-1.1.4.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/color-name/-/color-name-1.1.4.tgz"},"options":{"compress":true},"status":301}}

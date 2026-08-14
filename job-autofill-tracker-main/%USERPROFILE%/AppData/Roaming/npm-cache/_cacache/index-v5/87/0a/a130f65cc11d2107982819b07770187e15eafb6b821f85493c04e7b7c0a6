@@ -1,0 +1,2 @@
+
+2a82b9f451865f88099febfaae3373d7a29b1e47	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/bundle-name/-/bundle-name-4.1.0.tgz","integrity":null,"time":1785939379855,"size":"262","metadata":{"time":1785939379855,"url":"http://registry.npm.taobao.org/bundle-name/-/bundle-name-4.1.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/bundle-name/-/bundle-name-4.1.0.tgz"},"options":{"compress":true},"status":301}}

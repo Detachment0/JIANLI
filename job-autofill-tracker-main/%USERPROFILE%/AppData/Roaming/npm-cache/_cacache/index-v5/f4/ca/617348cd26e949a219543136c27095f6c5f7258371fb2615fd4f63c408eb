@@ -1,0 +1,2 @@
+
+4c6060d86dd0c659a80d8812f0cd2e7f0737980c	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/pathe/-/pathe-2.0.3.tgz","integrity":null,"time":1785939379139,"size":"262","metadata":{"time":1785939379139,"url":"http://registry.npm.taobao.org/pathe/-/pathe-2.0.3.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/pathe/-/pathe-2.0.3.tgz"},"options":{"compress":true},"status":301}}

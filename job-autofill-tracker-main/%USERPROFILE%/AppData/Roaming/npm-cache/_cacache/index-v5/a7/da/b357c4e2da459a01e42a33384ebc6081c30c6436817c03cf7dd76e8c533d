@@ -1,0 +1,2 @@
+
+b4ad76f307695f9f075701d9fe00c4cec5b91660	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/cli-boxes/-/cli-boxes-3.0.0.tgz","integrity":null,"time":1785939379820,"size":"262","metadata":{"time":1785939379820,"url":"http://registry.npm.taobao.org/cli-boxes/-/cli-boxes-3.0.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/cli-boxes/-/cli-boxes-3.0.0.tgz"},"options":{"compress":true},"status":301}}

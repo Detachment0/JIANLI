@@ -1,0 +1,2 @@
+
+9460413377df3a3f36792966f0ed6f2f299598ea	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/vary","integrity":null,"time":1786238744590,"size":"262","metadata":{"time":1786238744589,"url":"http://registry.npm.taobao.org/vary","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/vary"},"options":{"compress":true},"status":301}}

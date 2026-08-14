@@ -1,0 +1,2 @@
+
+f065d8cf0916663153c30e1b66b6a31db468ab2a	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/node-releases/-/node-releases-2.0.50.tgz","integrity":null,"time":1785939379236,"size":"262","metadata":{"time":1785939379236,"url":"http://registry.npm.taobao.org/node-releases/-/node-releases-2.0.50.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/node-releases/-/node-releases-2.0.50.tgz"},"options":{"compress":true},"status":301}}

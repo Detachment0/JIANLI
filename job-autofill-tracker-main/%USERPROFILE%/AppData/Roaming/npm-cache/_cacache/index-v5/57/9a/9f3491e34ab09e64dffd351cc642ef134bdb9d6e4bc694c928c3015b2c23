@@ -1,0 +1,2 @@
+
+fc8d5ddef2199ff2298101dee5168db2c85f9b32	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/pino/-/pino-9.7.0.tgz","integrity":null,"time":1785939379129,"size":"262","metadata":{"time":1785939379129,"url":"http://registry.npm.taobao.org/pino/-/pino-9.7.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/pino/-/pino-9.7.0.tgz"},"options":{"compress":true},"status":301}}

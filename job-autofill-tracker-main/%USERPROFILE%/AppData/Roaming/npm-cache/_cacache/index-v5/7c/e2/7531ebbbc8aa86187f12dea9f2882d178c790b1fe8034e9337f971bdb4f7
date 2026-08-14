@@ -1,0 +1,2 @@
+
+8511940196bd4503ec44bcca10e8d4211dff1f72	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/path-is-inside","integrity":null,"time":1786238744624,"size":"262","metadata":{"time":1786238744624,"url":"http://registry.npm.taobao.org/path-is-inside","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:45 GMT","location":"https://registry.npmmirror.com/path-is-inside"},"options":{"compress":true},"status":301}}

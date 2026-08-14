@@ -1,0 +1,2 @@
+
+add401fb7ffc660cf137077dbed7e9968e0d55b2	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/@types/chrome/-/chrome-0.1.13.tgz","integrity":null,"time":1785939380023,"size":"262","metadata":{"time":1785939380023,"url":"http://registry.npm.taobao.org/@types/chrome/-/chrome-0.1.13.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/@types/chrome/-/chrome-0.1.13.tgz"},"options":{"compress":true},"status":301}}

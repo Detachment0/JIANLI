@@ -1,0 +1,122 @@
+import { DEFAULT_SETTINGS, EMPTY_PROFILE, type DashboardLaunch, type PendingApplication, type Profile, type Settings } from "./schema";
+import { DEMO_PROFILE } from "./demo";
+
+const PROFILE_KEY = "profile";
+const SETTINGS_KEY = "settings";
+const PENDING_APPLICATIONS_KEY = "pendingApplications";
+const DASHBOARD_LAUNCH_KEY = "dashboardLaunch";
+const APPLICATIONS_REV_KEY = "applicationsRev";
+const DUE_COUNT_KEY = "dueCount";
+
+export async function getProfile(): Promise<Profile> {
+  const result = await chrome.storage.local.get([PROFILE_KEY, SETTINGS_KEY]);
+  const storedSettings = result[SETTINGS_KEY] as Partial<Settings> | undefined;
+  if (storedSettings?.demoMode) return structuredClone(DEMO_PROFILE);
+  const stored = result[PROFILE_KEY] as Partial<Profile> | undefined;
+  return {
+    ...EMPTY_PROFILE,
+    ...stored,
+    identity: {
+      ...EMPTY_PROFILE.identity,
+      ...stored?.identity,
+      address: {
+        ...EMPTY_PROFILE.identity.address,
+        ...stored?.identity?.address
+      },
+      location: {
+        ...EMPTY_PROFILE.identity.location,
+        ...stored?.identity?.location
+      },
+      links: {
+        ...EMPTY_PROFILE.identity.links,
+        ...stored?.identity?.links
+      }
+    },
+    workAuthorization: {
+      ...EMPTY_PROFILE.workAuthorization,
+      ...stored?.workAuthorization
+    },
+    demographics: {
+      ...EMPTY_PROFILE.demographics,
+      ...stored?.demographics
+    },
+    applicationDefaults: {
+      ...EMPTY_PROFILE.applicationDefaults,
+      ...stored?.applicationDefaults
+    }
+  };
+}
+
+export async function saveProfile(profile: Profile): Promise<void> {
+  const settings = await getSettings();
+  if (settings.demoMode) throw new Error("Profile changes cannot be saved while demo mode is active.");
+  await chrome.storage.local.set({ [PROFILE_KEY]: profile });
+}
+
+export async function getSettings(): Promise<Settings> {
+  const result = await chrome.storage.local.get(SETTINGS_KEY);
+  const stored = result[SETTINGS_KEY] as Partial<Settings> | undefined;
+  return {
+    ...DEFAULT_SETTINGS,
+    ...stored,
+    enabledSites: {
+      ...DEFAULT_SETTINGS.enabledSites,
+      ...stored?.enabledSites
+    }
+  };
+}
+
+export async function saveSettings(settings: Settings): Promise<void> {
+  await chrome.storage.local.set({ [SETTINGS_KEY]: settings });
+}
+
+export async function getPendingApplications(): Promise<PendingApplication[]> {
+  const result = await chrome.storage.local.get(PENDING_APPLICATIONS_KEY);
+  return (result[PENDING_APPLICATIONS_KEY] as PendingApplication[] | undefined) ?? [];
+}
+
+export async function queuePendingApplication(pending: PendingApplication): Promise<void> {
+  if ((await getSettings()).demoMode) return;
+  const pendingApplications = await getPendingApplications();
+  if (pendingApplications.some((item) => item.id === pending.id)) return;
+  await chrome.storage.local.set({ [PENDING_APPLICATIONS_KEY]: [pending, ...pendingApplications] });
+}
+
+export async function removePendingApplication(id: string): Promise<void> {
+  if ((await getSettings()).demoMode) return;
+  const pendingApplications = await getPendingApplications();
+  await chrome.storage.local.set({
+    [PENDING_APPLICATIONS_KEY]: pendingApplications.filter((item) => item.id !== id)
+  });
+}
+
+// Cross-context change signal for the applications table: Dexie has no events
+// that reach content scripts, so every mutation bumps this counter and drawers
+// listen for it via chrome.storage.onChanged.
+export async function bumpApplicationsRev(): Promise<void> {
+  const result = await chrome.storage.local.get(APPLICATIONS_REV_KEY);
+  const current = (result[APPLICATIONS_REV_KEY] as number | undefined) ?? 0;
+  await chrome.storage.local.set({ [APPLICATIONS_REV_KEY]: current + 1 });
+}
+
+export async function setDueCount(count: number): Promise<void> {
+  await chrome.storage.local.set({ [DUE_COUNT_KEY]: count });
+}
+
+export async function getDueCount(): Promise<number> {
+  const result = await chrome.storage.local.get(DUE_COUNT_KEY);
+  return (result[DUE_COUNT_KEY] as number | undefined) ?? 0;
+}
+
+export async function setDashboardLaunch(launch: DashboardLaunch): Promise<void> {
+  await chrome.storage.local.set({ [DASHBOARD_LAUNCH_KEY]: launch });
+}
+
+export async function getDashboardLaunch(): Promise<DashboardLaunch | undefined> {
+  const result = await chrome.storage.local.get(DASHBOARD_LAUNCH_KEY);
+  return result[DASHBOARD_LAUNCH_KEY] as DashboardLaunch | undefined;
+}
+
+export async function clearDashboardLaunch(): Promise<void> {
+  await chrome.storage.local.remove(DASHBOARD_LAUNCH_KEY);
+}

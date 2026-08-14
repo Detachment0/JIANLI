@@ -1,0 +1,2 @@
+
+269cab113b7ea5f7ad924e46dda3e46da8ea707e	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/registry-url/-/registry-url-6.0.1.tgz","integrity":null,"time":1785939378955,"size":"262","metadata":{"time":1785939378955,"url":"http://registry.npm.taobao.org/registry-url/-/registry-url-6.0.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/registry-url/-/registry-url-6.0.1.tgz"},"options":{"compress":true},"status":301}}

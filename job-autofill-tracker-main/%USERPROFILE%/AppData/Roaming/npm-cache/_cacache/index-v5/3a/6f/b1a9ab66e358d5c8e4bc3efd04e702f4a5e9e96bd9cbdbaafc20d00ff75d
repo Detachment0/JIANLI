@@ -1,0 +1,2 @@
+
+73bb16a72ec840ef715ee01f62fe6179580b6016	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/package-json/-/package-json-10.0.1.tgz","integrity":null,"time":1785939379160,"size":"262","metadata":{"time":1785939379160,"url":"http://registry.npm.taobao.org/package-json/-/package-json-10.0.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/package-json/-/package-json-10.0.1.tgz"},"options":{"compress":true},"status":301}}

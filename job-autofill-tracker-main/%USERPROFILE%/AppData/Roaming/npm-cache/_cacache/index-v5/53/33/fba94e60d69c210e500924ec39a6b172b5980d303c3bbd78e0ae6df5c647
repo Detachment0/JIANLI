@@ -1,0 +1,2 @@
+
+6d66412cbaf8d853ea2d5803ebe8027be89fa712	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/@emnapi/runtime/-/runtime-1.11.1.tgz","integrity":null,"time":1785939380175,"size":"262","metadata":{"time":1785939380175,"url":"http://registry.npm.taobao.org/@emnapi/runtime/-/runtime-1.11.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/@emnapi/runtime/-/runtime-1.11.1.tgz"},"options":{"compress":true},"status":301}}

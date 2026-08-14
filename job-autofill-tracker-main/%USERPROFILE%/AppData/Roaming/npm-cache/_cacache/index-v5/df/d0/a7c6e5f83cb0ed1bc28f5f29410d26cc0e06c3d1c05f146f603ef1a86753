@@ -1,0 +1,2 @@
+
+0d238b640632ed81f34785080c16ff3bbb444faf	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/@zeit%2fschemas","integrity":null,"time":1786238743991,"size":"262","metadata":{"time":1786238743991,"url":"http://registry.npm.taobao.org/@zeit%2fschemas","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/@zeit%2fschemas"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,2 @@
+
+00f4b1c425b481edf5c6817f610b39a91c5f0b8d	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/clipboardy","integrity":null,"time":1786238744003,"size":"262","metadata":{"time":1786238744003,"url":"http://registry.npm.taobao.org/clipboardy","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:44 GMT","location":"https://registry.npmmirror.com/clipboardy"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,520 @@
+export type CanonicalField =
+  | "identity.firstName"
+  | "identity.middleName"
+  | "identity.lastName"
+  | "identity.fullName"
+  | "identity.email"
+  | "identity.phone"
+  | "identity.phoneCountryCode"
+  | "identity.address.line1"
+  | "identity.address.line2"
+  | "identity.address.postalCode"
+  | "identity.location.city"
+  | "identity.location.state"
+  | "identity.location.country"
+  | "identity.links.linkedin"
+  | "identity.links.github"
+  | "identity.links.portfolio"
+  | "profile.summary"
+  | "workAuthorization.usAuthorized"
+  | "workAuthorization.requiresSponsorship"
+  | "workAuthorization.visaStatus"
+  | "workAuthorization.englishProficiency"
+  | "applicationDefaults.referralSource"
+  | "applicationDefaults.referralDetails"
+  | "applicationDefaults.employeeReferralName"
+  | "applicationDefaults.needsRecruitmentAdjustments"
+  | "applicationDefaults.recruitmentAdjustmentsDetails"
+  | "applicationDefaults.previouslyEmployedByFitch"
+  | "applicationDefaults.currentEmployer"
+  | "applicationDefaults.currentTitle"
+  | "applicationDefaults.currentSalary"
+  | "applicationDefaults.desiredSalary"
+  | "applicationDefaults.salaryCurrency"
+  | "applicationDefaults.profileVisibility"
+  | "applicationDefaults.jobNotifications"
+  | "demographics.gender"
+  | "demographics.race"
+  | "demographics.veteran"
+  | "demographics.disability";
+
+export type FieldType = "text" | "textarea" | "select" | "combobox" | "radio" | "checkbox" | "file" | "confirmation" | "hyperlink";
+
+export type FieldDescriptor = {
+  id: string;
+  question: string;
+  type: FieldType;
+  options?: string[];
+  value?: string | boolean;
+  required?: boolean;
+};
+
+export type FieldFill = {
+  id: string;
+  value: string | boolean;
+  source: "profile" | "memory" | "ai" | "skip";
+  confidence: number;
+};
+
+export type AutofillReviewStatus = "filled" | "missing" | "unsupported" | "confirmation";
+
+export type AutofillReviewItem = {
+  id: string;
+  question: string;
+  status: AutofillReviewStatus;
+  detail: string;
+};
+
+export type Experience = {
+  title: string;
+  company: string;
+  start: string;
+  end: string;
+  highlights: string[];
+  stack: string[];
+};
+
+export type PersonalProject = {
+  name: string;
+  description: string;
+  role: string;
+  start: string;
+  end: string;
+  highlights: string[];
+  stack: string[];
+  url: string;
+  repository: string;
+};
+
+export type SkillFact = {
+  years: number;
+  note: string;
+  services?: string[];
+};
+
+export type AnswerMemory = {
+  id?: number;
+  questionHash: string;
+  questionText: string;
+  answer: string;
+  lastUsed: string;
+  editable: boolean;
+};
+
+export type ApplicationStatus =
+  | "Saved"
+  | "Applied"
+  | "Screen"
+  | "Interview"
+  | "Offer"
+  | "Rejected"
+  | "Ghosted";
+
+export const APPLICATION_STATUSES: ApplicationStatus[] = ["Saved", "Applied", "Screen", "Interview", "Offer", "Rejected", "Ghosted"];
+
+export type CompensationPeriod = "year" | "month" | "hour" | "one-time" | "";
+export type CompensationCurrency = "MXN" | "USD" | "EUR" | "";
+
+export type Compensation = {
+  text: string;
+  currency: CompensationCurrency;
+  min?: number | null;
+  max?: number | null;
+  period: CompensationPeriod;
+};
+
+export type UpworkProposalStatus =
+  | "Submitted"
+  | "Responded"
+  | "Interview"
+  | "Offered"
+  | "Hired"
+  | "Declined"
+  | "Withdrawn"
+  | "Archived";
+
+export type UpworkProposalDetails = {
+  status: UpworkProposalStatus;
+  contractType: "hourly" | "fixed" | "";
+  proposedAmount?: number | null;
+  currency: CompensationCurrency;
+  baseConnects?: number | null;
+  boostBid?: number | null;
+  boostCharged?: number | null;
+  respondedAt?: string;
+  interviewedAt?: string;
+  offeredAt?: string;
+  hiredAt?: string;
+};
+
+export type ThemeMode = "light" | "dark";
+export type TrackingEntryMode = "manual" | "ai";
+
+export type Application = {
+  id?: number;
+  company: string;
+  role: string;
+  jobUrl: string;
+  source: string;
+  dateApplied: string;
+  status: ApplicationStatus;
+  location?: string;
+  workMode?: "Remote" | "Hybrid" | "On-site" | "";
+  compensation?: Compensation;
+  jobDescription?: string;
+  resumeVersion?: string;
+  answersUsed: Array<{ question: string; answer: string }>;
+  notes: string;
+  nextActionDate?: string;
+  upwork?: UpworkProposalDetails;
+};
+
+export type PendingApplication = {
+  id: string;
+  application: Application;
+  createdAt: string;
+};
+
+export type DashboardLaunch = {
+  tab: "tracker";
+  pendingId?: string;
+  applicationId?: number;
+  createdAt: string;
+};
+
+export type Profile = {
+  identity: {
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    fullName: string;
+    preferredName: string;
+    email: string;
+    phone: string;
+    phoneCountryCode: string;
+    address: {
+      line1: string;
+      line2: string;
+      postalCode: string;
+    };
+    location: {
+      city: string;
+      state: string;
+      country: string;
+      willingToRelocate: boolean;
+    };
+    links: {
+      linkedin: string;
+      github: string;
+      portfolio: string;
+      website: string;
+    };
+  };
+  workAuthorization: {
+    usAuthorized: boolean;
+    requiresSponsorship: boolean;
+    visaStatus: string;
+    eligibleCountries: string[];
+    timezonesComfortable: string[];
+    englishProficiency: string;
+  };
+  experience: Experience[];
+  personalProjects: PersonalProject[];
+  additionalKnowledge: string;
+  summary: string;
+  skills: Record<string, SkillFact>;
+  education: Array<{ degree: string; school: string; year: string }>;
+  demographics: {
+    gender: string;
+    race: string;
+    veteran: string;
+    disability: string;
+  };
+  applicationDefaults: {
+    referralSource: string;
+    referralDetails: string;
+    employeeReferralName: string;
+    needsRecruitmentAdjustments: boolean;
+    recruitmentAdjustmentsDetails: string;
+    previouslyEmployedByFitch: boolean;
+    currentEmployer: string;
+    currentTitle: string;
+    currentSalary: string;
+    desiredSalary: string;
+    salaryCurrency: string;
+    profileVisibility: string;
+    jobNotifications: boolean;
+  };
+  resumeFileRef: string;
+  resumeFile?: {
+    name: string;
+    type: string;
+    dataUrl: string;
+  };
+  coverLetterFile?: {
+    name: string;
+    type: string;
+    dataUrl: string;
+  };
+};
+
+export type Settings = {
+  demoMode: boolean;
+  provider: "openai";
+  apiKey: string;
+  model: string;
+  theme: ThemeMode;
+  trackingEntryMode: TrackingEntryMode;
+  cardBadges: boolean;
+  enabledSites: {
+    greenhouse: boolean;
+    lever: boolean;
+    ashby: boolean;
+    linkedin: boolean;
+  };
+};
+
+export type MapFieldsRequest = {
+  kind: "MAP_FIELDS";
+  fields: FieldDescriptor[];
+  jobDescription: string;
+  page: PageContext;
+};
+
+export type LogApplicationRequest = {
+  kind: "LOG_APPLICATION";
+  application: Application;
+};
+
+export type QueuePendingApplicationRequest = {
+  kind: "QUEUE_PENDING_APPLICATION";
+  pending: PendingApplication;
+};
+
+export type RemovePendingApplicationRequest = {
+  kind: "REMOVE_PENDING_APPLICATION";
+  id: string;
+};
+
+export type AutofillCurrentFormRequest = {
+  kind: "AUTOFILL_CURRENT_FORM";
+};
+
+export type TrackCurrentApplicationRequest = {
+  kind: "TRACK_CURRENT_APPLICATION";
+};
+
+export type GetTrackedJobRequest = {
+  kind: "GET_TRACKED_JOB";
+  url: string;
+};
+
+export type OpenDashboardRequest = {
+  kind: "OPEN_DASHBOARD";
+  pendingId?: string;
+  applicationId?: number;
+};
+
+export type AiJobFitRequest = {
+  kind: "AI_JOB_FIT";
+  jobDescription: string;
+  page: PageContext;
+};
+
+export type AiDraftAnswerRequest = {
+  kind: "AI_DRAFT_ANSWER";
+  question: string;
+};
+
+export type AutofillTabRequest = {
+  kind: "AUTOFILL_TAB";
+};
+
+export type AutofillActiveTabRequest = {
+  kind: "AUTOFILL_ACTIVE_TAB";
+};
+
+export type OpenWidgetActiveTabRequest = {
+  kind: "OPEN_WIDGET_ACTIVE_TAB";
+};
+
+export type ApplicationSubmittedRequest = {
+  kind: "APPLICATION_SUBMITTED";
+  pending: PendingApplication;
+};
+
+export type ShowTrackConfirmRequest = {
+  kind: "SHOW_TRACK_CONFIRM";
+  pending: PendingApplication;
+};
+
+export type UpdateApplicationRequest = {
+  kind: "UPDATE_APPLICATION";
+  id: number;
+  patch: Partial<Application>;
+};
+
+export type ListApplicationsRequest = {
+  kind: "LIST_APPLICATIONS";
+};
+
+export type DeleteApplicationRequest = {
+  kind: "DELETE_APPLICATION";
+  id: number;
+};
+
+export type AiDraftApplicationRequest = {
+  kind: "AI_DRAFT_APPLICATION";
+  postingText: string;
+};
+
+export type AiEnrichProfileRequest = {
+  kind: "AI_ENRICH_PROFILE";
+  text: string;
+};
+
+export type RememberAnswerRequest = {
+  kind: "REMEMBER_ANSWER";
+  question: string;
+  answer: string;
+};
+
+export type InjectResumeProfileRequest = {
+  kind: "INJECT_RESUME_PROFILE";
+};
+
+export type ClearResumeProfileRequest = {
+  kind: "CLEAR_RESUME_PROFILE";
+};
+
+export type PreviewFillRequest = {
+  kind: "PREVIEW_FILL";
+};
+
+export type ToggleWidgetRequest = {
+  kind: "TOGGLE_WIDGET";
+};
+
+export type PageContext = {
+  url: string;
+  title: string;
+  source: string;
+  company: string;
+  role: string;
+};
+
+export type CustomSynonymEntry = {
+  id: string;
+  field: CanonicalField;
+  synonyms: string[];
+  enabled: boolean;
+};
+
+export type ExtensionMessage =
+  | MapFieldsRequest
+  | LogApplicationRequest
+  | QueuePendingApplicationRequest
+  | RemovePendingApplicationRequest
+  | AutofillCurrentFormRequest
+  | TrackCurrentApplicationRequest
+  | GetTrackedJobRequest
+  | OpenDashboardRequest
+  | AiJobFitRequest
+  | AiDraftAnswerRequest
+  | AutofillTabRequest
+  | AutofillActiveTabRequest
+  | OpenWidgetActiveTabRequest
+  | ApplicationSubmittedRequest
+  | ShowTrackConfirmRequest
+  | UpdateApplicationRequest
+  | ListApplicationsRequest
+  | DeleteApplicationRequest
+  | AiDraftApplicationRequest
+  | AiEnrichProfileRequest
+  | RememberAnswerRequest
+  | InjectResumeProfileRequest
+  | ClearResumeProfileRequest
+  | PreviewFillRequest
+  | ToggleWidgetRequest;
+
+export const EMPTY_PROFILE: Profile = {
+  identity: {
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    fullName: "",
+    preferredName: "",
+    email: "",
+    phone: "",
+    phoneCountryCode: "+52",
+    address: {
+      line1: "",
+      line2: "",
+      postalCode: ""
+    },
+    location: {
+      city: "",
+      state: "Tamaulipas",
+      country: "Mexico",
+      willingToRelocate: false
+    },
+    links: {
+      linkedin: "",
+      github: "",
+      portfolio: "",
+      website: ""
+    }
+  },
+  workAuthorization: {
+    usAuthorized: false,
+    requiresSponsorship: true,
+    visaStatus: "",
+    eligibleCountries: ["Mexico"],
+    timezonesComfortable: ["EST", "CST", "PST"],
+    englishProficiency: "Professional (C1) - fluent speaking, writing, reading"
+  },
+  experience: [],
+  personalProjects: [],
+  additionalKnowledge: "",
+  summary: "",
+  skills: {},
+  education: [],
+  demographics: {
+    gender: "",
+    race: "",
+    veteran: "",
+    disability: ""
+  },
+  applicationDefaults: {
+    referralSource: "",
+    referralDetails: "",
+    employeeReferralName: "",
+    needsRecruitmentAdjustments: false,
+    recruitmentAdjustmentsDetails: "",
+    previouslyEmployedByFitch: false,
+    currentEmployer: "",
+    currentTitle: "",
+    currentSalary: "",
+    desiredSalary: "",
+    salaryCurrency: "",
+    profileVisibility: "",
+    jobNotifications: false
+  },
+  resumeFileRef: ""
+};
+
+export const DEFAULT_SETTINGS: Settings = {
+  demoMode: false,
+  provider: "openai",
+  apiKey: "",
+  model: "gpt-5.4-mini",
+  theme: "light",
+  trackingEntryMode: "manual",
+  cardBadges: true,
+  enabledSites: {
+    greenhouse: true,
+    lever: true,
+    ashby: true,
+    linkedin: true
+  }
+};

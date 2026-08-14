@@ -1,0 +1,2 @@
+
+7695fd010109c9023ef3289590edbded4b523421	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/mimic-fn","integrity":null,"time":1786238745453,"size":"262","metadata":{"time":1786238745453,"url":"http://registry.npm.taobao.org/mimic-fn","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:45 GMT","location":"https://registry.npmmirror.com/mimic-fn"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,2 @@
+
+44d02806617db66080548c623ffebd63689862fc	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/minimatch","integrity":null,"time":1786238744619,"size":"262","metadata":{"time":1786238744619,"url":"http://registry.npm.taobao.org/minimatch","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:45 GMT","location":"https://registry.npmmirror.com/minimatch"},"options":{"compress":true},"status":301}}

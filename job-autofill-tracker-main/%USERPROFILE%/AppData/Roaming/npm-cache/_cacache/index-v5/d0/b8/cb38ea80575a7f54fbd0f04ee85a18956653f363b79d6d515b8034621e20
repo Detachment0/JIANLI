@@ -1,0 +1,2 @@
+
+bab6fb87d4834d67e0f6450d1c2557577b18996a	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/safe-buffer/-/safe-buffer-5.2.1.tgz","integrity":null,"time":1785939378969,"size":"262","metadata":{"time":1785939378969,"url":"http://registry.npm.taobao.org/safe-buffer/-/safe-buffer-5.2.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/safe-buffer/-/safe-buffer-5.2.1.tgz"},"options":{"compress":true},"status":301}}

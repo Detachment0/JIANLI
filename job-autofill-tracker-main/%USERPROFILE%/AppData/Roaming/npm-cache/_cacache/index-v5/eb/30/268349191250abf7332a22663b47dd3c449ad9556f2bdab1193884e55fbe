@@ -1,0 +1,2 @@
+
+1045a158c9583dc97cf94b2bb249a0fda11930f8	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/nth-check/-/nth-check-2.1.1.tgz","integrity":null,"time":1785939379217,"size":"262","metadata":{"time":1785939379217,"url":"http://registry.npm.taobao.org/nth-check/-/nth-check-2.1.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/nth-check/-/nth-check-2.1.1.tgz"},"options":{"compress":true},"status":301}}

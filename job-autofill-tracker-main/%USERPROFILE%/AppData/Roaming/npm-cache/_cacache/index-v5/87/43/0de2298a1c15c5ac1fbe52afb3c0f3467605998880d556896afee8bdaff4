@@ -1,0 +1,2 @@
+
+bb10cb02bb0c3925e15a3850c13ce6ef590e484d	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/rc9/-/rc9-3.0.1.tgz","integrity":null,"time":1785939379055,"size":"262","metadata":{"time":1785939379055,"url":"http://registry.npm.taobao.org/rc9/-/rc9-3.0.1.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/rc9/-/rc9-3.0.1.tgz"},"options":{"compress":true},"status":301}}

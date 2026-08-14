@@ -1,0 +1,2 @@
+
+bbf73ab41dca392e114695ccebd8ba1827302f35	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/ci-info/-/ci-info-4.4.0.tgz","integrity":null,"time":1785939379833,"size":"262","metadata":{"time":1785939379833,"url":"http://registry.npm.taobao.org/ci-info/-/ci-info-4.4.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/ci-info/-/ci-info-4.4.0.tgz"},"options":{"compress":true},"status":301}}

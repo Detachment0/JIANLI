@@ -1,0 +1,2 @@
+
+4171df511e5e803de8ccf6473e1a661994e9b00a	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/registry-auth-token","integrity":null,"time":1786238744654,"size":"262","metadata":{"time":1786238744654,"url":"http://registry.npm.taobao.org/registry-auth-token","reqHeaders":{"accept":"application/json"},"resHeaders":{"content-type":"text/html","date":"Sun, 09 Aug 2026 01:25:45 GMT","location":"https://registry.npmmirror.com/registry-auth-token"},"options":{"compress":true},"status":301}}

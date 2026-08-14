@@ -1,0 +1,2 @@
+
+22b51793a330a9c29b83d9db6b8cd5f685069132	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/default-browser/-/default-browser-5.5.0.tgz","integrity":null,"time":1785939379773,"size":"262","metadata":{"time":1785939379773,"url":"http://registry.npm.taobao.org/default-browser/-/default-browser-5.5.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/default-browser/-/default-browser-5.5.0.tgz"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,2 @@
+
+3a89d119d13cdf3321f2bd508ecc477698a10755	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/obug/-/obug-2.1.3.tgz","integrity":null,"time":1785939379214,"size":"262","metadata":{"time":1785939379214,"url":"http://registry.npm.taobao.org/obug/-/obug-2.1.3.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:19 GMT","location":"https://registry.npmmirror.com/obug/-/obug-2.1.3.tgz"},"options":{"compress":true},"status":301}}

@@ -1,0 +1,2 @@
+
+85c1f041585123678ec84100f103cb3aab3fe2c5	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/giget/-/giget-3.3.0.tgz","integrity":null,"time":1785939379567,"size":"262","metadata":{"time":1785939379567,"url":"http://registry.npm.taobao.org/giget/-/giget-3.3.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/giget/-/giget-3.3.0.tgz"},"options":{"compress":true},"status":301}}

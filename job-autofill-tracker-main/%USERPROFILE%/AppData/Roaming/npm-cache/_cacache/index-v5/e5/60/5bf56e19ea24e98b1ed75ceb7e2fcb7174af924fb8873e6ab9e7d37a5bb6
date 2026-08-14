@@ -1,0 +1,2 @@
+
+cd6929e76eead06a7fcf21c5c28b58163810ed0b	{"key":"make-fetch-happen:request-cache:http://registry.npm.taobao.org/configstore/-/configstore-7.1.0.tgz","integrity":null,"time":1785939379795,"size":"262","metadata":{"time":1785939379795,"url":"http://registry.npm.taobao.org/configstore/-/configstore-7.1.0.tgz","reqHeaders":{},"resHeaders":{"content-type":"text/html","date":"Wed, 05 Aug 2026 14:16:20 GMT","location":"https://registry.npmmirror.com/configstore/-/configstore-7.1.0.tgz"},"options":{"compress":true},"status":301}}
