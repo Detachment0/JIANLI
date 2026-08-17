@@ -23,30 +23,44 @@ export default defineContentScript({
   cssInjectionMode: "ui",
   async main(ctx) {
     const allowedJobPage = isAllowedJobPage();
+    const isTopWithEmbedded = isTopPageWithEmbeddedJobForm();
+    console.log(`[autofill-content] init, url=${location.href.slice(0,80)}, allowedJobPage=${allowedJobPage}, isTopWithEmbedded=${isTopWithEmbedded}, isTop=${window.self === window.top}`);
 
-    if (allowedJobPage && !isTopPageWithEmbeddedJobForm()) {
+    // 监听器无条件注册：content script 已在所有页面加载（matches: https://*/*），
+    // 若页面无表单，fillCurrentForm 返回 total=0 即可，不视为错误。
+    // 历史条件 allowedJobPage || isTopWithEmbedded 会在非白名单页面（如字节跳动 jobs.bytedance.com）
+    // 导致监听器不注册，Widget 发出的消息找不到接收端。
+    console.log(`[autofill-content] Registering autofill listeners on frame ${window.self === window.top ? 'TOP' : 'IFRAME'}`);
+    {
       chrome.runtime.onMessage.addListener((message: ExtensionMessage, _sender, sendResponse) => {
+        console.log(`[autofill-content] Received message: kind=${message.kind}`);
         if (message.kind === "AUTOFILL_CURRENT_FORM") {
+          console.log(`[autofill-content] AUTOFILL_CURRENT_FORM: calling fillCurrentForm()`);
           fillCurrentForm()
             .then((result) => {
+              console.log(`[autofill-content] fillCurrentForm done: ok=${result.ok}, total=${result.summary.total}`);
               injectFillNotification(result);
               void chrome.storage.session.set({ lastFillResult: result });
               sendResponse(result);
             })
             .catch((error: unknown) => {
               const detail = error instanceof Error ? error.message : String(error);
+              console.error(`[autofill-content] fillCurrentForm FAILED:`, detail);
               sendResponse({ ok: false, error: detail });
             });
           return true;
         }
 
         if (message.kind === "PREVIEW_FILL") {
+          console.log(`[autofill-content] PREVIEW_FILL: calling fillCurrentForm(true)`);
           fillCurrentForm(true)
             .then((preview) => {
+              console.log(`[autofill-content] preview done: ok=${preview.ok}, total=${preview.summary.total}`);
               injectPreviewModal(preview, sendResponse);
             })
             .catch((error: unknown) => {
               const detail = error instanceof Error ? error.message : String(error);
+              console.error(`[autofill-content] preview FAILED:`, detail);
               sendResponse({ ok: false, error: detail });
             });
           return true;
@@ -59,8 +73,9 @@ export default defineContentScript({
 
         return false;
       });
-      watchSubmit();
     }
+
+    if (allowedJobPage) watchSubmit();
 
     if (window.self !== window.top) return;
 

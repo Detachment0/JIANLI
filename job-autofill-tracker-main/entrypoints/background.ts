@@ -86,6 +86,7 @@ async function handleMessage(message: ExtensionMessage, sender: chrome.runtime.M
   }
 
   if (message.kind === "AUTOFILL_TAB") {
+    console.log(`[autofill-bg] AUTOFILL_TAB received, tabId=${sender.tab?.id}, url=${sender.tab?.url}`);
     if (sender.tab?.id === undefined) throw new Error("Autofill must be requested from a page tab.");
     return await sendAutofillToTab(sender.tab.id);
   }
@@ -187,9 +188,9 @@ async function handleMessage(message: ExtensionMessage, sender: chrome.runtime.M
   }
 
   if (message.kind === "PREVIEW_FILL") {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab?.id === undefined) throw new Error("No active page tab was found.");
-    return await sendMessageToTabWithInjection(tab.id, { kind: "PREVIEW_FILL" } satisfies ExtensionMessage);
+    const tabId = sender.tab?.id ?? (await chrome.tabs.query({ active: true, currentWindow: true }))[0]?.id;
+    if (tabId === undefined) throw new Error("No active page tab was found.");
+    return await sendMessageToTabWithInjection(tabId, { kind: "PREVIEW_FILL" } satisfies ExtensionMessage);
   }
 
   if (message.kind === "TRACK_CURRENT_APPLICATION") {
@@ -224,26 +225,45 @@ async function sendAutofillToTab(tabId: number): Promise<unknown> {
 }
 
 async function sendMessageToTabWithInjection(tabId: number, request: ExtensionMessage): Promise<unknown> {
-  try {
-    return await chrome.tabs.sendMessage(tabId, request);
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    if (!detail.includes("Receiving end does not exist")) throw error;
+  console.log(`[autofill-bg] sendMessageToTabWithInjection tabId=${tabId} kind=${request.kind}`);
+  const result = await tryBroadcastToAllFrames(tabId, request);
+  console.log(`[autofill-bg] broadcast result received=${result.received}`);
+  if (result.received) {
+    console.log(`[autofill-bg] response:`, result.response);
+    return result.response;
   }
+  throw new Error("当前页面没有响应填充请求，请刷新页面后重试。");
+}
 
+/** 遍历 tab 的所有 frame，逐一发送消息，返回第一个有接收端的响应。 */
+async function tryBroadcastToAllFrames(tabId: number, request: ExtensionMessage): Promise<{ received: boolean; response: unknown }> {
+  let frames: chrome.webNavigation.GetAllFrameResultDetails[];
   try {
-    await chrome.scripting.executeScript({
-      target: { tabId, allFrames: true },
-      files: ["content-scripts/content.js"]
-    });
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    if (detail.includes("Cannot access contents of url")) {
-      throw new Error("当前页面不支持此功能（扩展自身页面无法使用侧面板或自动填充）。");
+    frames = (await chrome.webNavigation.getAllFrames({ tabId })) ?? [];
+  } catch (err) {
+    console.log(`[autofill-bg] getAllFrames failed:`, err);
+    frames = [{ frameId: 0, errorOccurred: false, url: "", parentFrameId: -1 } as chrome.webNavigation.GetAllFrameResultDetails];
+  }
+  console.log(`[autofill-bg] frames:`, frames.map(f => ({frameId: f.frameId, url: f.url?.slice(0,80)})));
+
+  const orderedFrameIds = [...new Set(frames.map((f) => f.frameId))]
+    .sort((a, b) => (a === 0 ? 1 : b === 0 ? -1 : a - b));
+  console.log(`[autofill-bg] orderedFrameIds:`, orderedFrameIds);
+
+  for (const frameId of orderedFrameIds) {
+    try {
+      const response = await chrome.tabs.sendMessage(tabId, request, { frameId });
+      console.log(`[autofill-bg] frame ${frameId} response:`, response);
+      if (response !== undefined) return { received: true, response };
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      if (!detail.includes("Receiving end does not exist")) {
+        console.error(`[autofill-bg] Frame ${frameId} send error:`, detail);
+      } else {
+        console.log(`[autofill-bg] Frame ${frameId} no receiver: ${detail}`);
+      }
     }
-    throw error;
   }
-
-  await new Promise((resolve) => setTimeout(resolve, 150));
-  return await chrome.tabs.sendMessage(tabId, request);
+  console.log(`[autofill-bg] No frame responded for tabId=${tabId}`);
+  return { received: false, response: undefined };
 }

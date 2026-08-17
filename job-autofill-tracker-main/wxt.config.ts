@@ -7,7 +7,7 @@ export default defineConfig({
     name: "求职自动填表 + 跟踪器",
     description: "从本地个人资料自动填写求职申请，草拟筛选问题答案，并跟踪申请进度。",
     version: "0.1.0",
-    permissions: ["storage", "unlimitedStorage", "activeTab", "downloads", "scripting", "alarms"],
+    permissions: ["storage", "unlimitedStorage", "activeTab", "downloads", "scripting", "alarms", "webNavigation"],
     host_permissions: ["https://*/*", "http://*/*", "https://api.openai.com/*"],
     action: {
       default_title: "Job Autofill + Tracker"

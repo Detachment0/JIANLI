@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+﻿﻿﻿﻿import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { BriefcaseBusiness, Building2, CalendarClock, ChevronDown, ChevronRight, Download, FileText, KeyRound, LayoutDashboard, ListFilter, MapPin, Plus, Save, Search, Sparkles, Trash2, Upload, UserRound, Wand2, X, BookOpen, Globe } from "lucide-react";
 import { draftApplicationFromJobPosting, draftSingleAnswer, enrichProfileFromText, importProfileFromCv } from "../../lib/ai";
@@ -7,6 +7,7 @@ import { db } from "../../lib/db";
 import { createDemoApplications, createDemoMemories } from "../../lib/demo";
 import { questionHash } from "../../lib/mapping";
 import { loadCustomSynonyms, saveCustomSynonyms } from "../../lib/customSynonyms";
+import { downloadExcelTemplate, parseExcelProfile } from "../../lib/excelProfile";
 import { APPLICATION_STATUSES, EMPTY_PROFILE, type AnswerMemory, type Application, type ApplicationStatus, type CanonicalField, type CompensationCurrency, type CompensationPeriod, type CustomSynonymEntry, type Experience, type PendingApplication, type PersonalProject, type Profile, type Settings, type ThemeMode, type TrackingEntryMode, type UpworkProposalStatus } from "../../lib/schema";
 import { bumpApplicationsRev, clearDashboardLaunch, getDashboardLaunch, getPendingApplications, getProfile, getSettings, removePendingApplication, saveProfile, saveSettings } from "../../lib/storage";
 import { applyTheme } from "../../lib/theme";
@@ -144,6 +145,33 @@ function App() {
     }
   }
 
+  async function importExcel(file: File) {
+    try {
+      if (settings?.demoMode) throw new Error("导入简历前请先退出演示模式。");
+      setImportStatus("正在解析 Excel...");
+      const buffer = await file.arrayBuffer();
+      const result = await parseExcelProfile(buffer, profile);
+      setImportStatus(
+        `已匹配 ${result.matchedCount} 个字段，未匹配表头 ${result.unmatchedHeaders.length} 个，空值跳过 ${result.skippedEmpty} 个。`
+          + (result.unmatchedHeaders.length > 0 ? `（未匹配：${result.unmatchedHeaders.slice(0, 5).join("、")}${result.unmatchedHeaders.length > 5 ? "..." : ""}）` : "")
+      );
+      setProfile(result.profile);
+      await saveProfile(result.profile);
+      setProfileSaveStatus(`已保存 ${new Date().toLocaleTimeString()}`);
+    } catch (error) {
+      setImportStatus(error instanceof Error ? error.message : String(error));
+    }
+  }
+
+  function downloadTemplate() {
+    try {
+      downloadExcelTemplate();
+      setImportStatus("Excel 模板已开始下载，请填好后使用「导入 Excel 简历」。");
+    } catch (error) {
+      setImportStatus(error instanceof Error ? error.message : String(error));
+    }
+  }
+
   function toggleLocale() {
     const next = getLocale() === "zh-CN" ? "en" : "zh-CN";
     setLocale(next);
@@ -262,6 +290,8 @@ function App() {
               saveStatus={profileSaveStatus}
               importStatus={importStatus}
               onImportCv={importCv}
+              onImportExcel={importExcel}
+              onDownloadTemplate={downloadTemplate}
             />
           )}
           {tab === "knowledge" && (
@@ -388,13 +418,17 @@ function ProfilePanel({
   setProfile,
   saveStatus,
   importStatus,
-  onImportCv
+  onImportCv,
+  onImportExcel,
+  onDownloadTemplate
 }: {
   profile: Profile;
   setProfile: (profile: Profile) => void;
   saveStatus: string;
   importStatus: string;
   onImportCv: (file: File) => Promise<void>;
+  onImportExcel: (file: File) => Promise<void>;
+  onDownloadTemplate: () => void;
 }) {
   const [smartAddText, setSmartAddText] = useState("");
   const [smartAddStatus, setSmartAddStatus] = useState("");
@@ -435,6 +469,13 @@ function ProfilePanel({
     event.target.value = "";
     if (!file) return;
     await onImportCv(file);
+  }
+
+  async function importSelectedExcel(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    await onImportExcel(file);
   }
 
   async function storeCoverLetter(event: React.ChangeEvent<HTMLInputElement>) {
@@ -497,6 +538,20 @@ function ProfilePanel({
         <span>导入简历 PDF</span>
         <input type="file" accept="application/pdf" onChange={(event) => void importSelectedCv(event)} />
       </label>
+      <label className="importCv">
+        <Upload size={16} />
+        <span>导入 Excel 简历</span>
+        <input type="file" accept=".xlsx,.xls,.csv" onChange={(event) => void importSelectedExcel(event)} />
+      </label>
+      <button
+        type="button"
+        className="importCv"
+        onClick={onDownloadTemplate}
+        style={{ cursor: "pointer", border: "1px dashed var(--border, #cbd5e1)", background: "transparent" }}
+      >
+        <Download size={16} />
+        <span>下载 Excel 模板</span>
+      </button>
       <label className="importCv secondaryUpload">
         <Upload size={16} />
         <span>{profile.coverLetterFile ? `求职信：${profile.coverLetterFile.name}` : "存储求职信"}</span>
